@@ -14,7 +14,7 @@ const Category = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/v1/article?category_id=" + id)
+      .get(config.apiHost +"/api/v1/article?category_id=" + id)
       .then((response) => {
         console.log(response.data);
         setArticles(response.data);
@@ -26,7 +26,7 @@ const Category = () => {
         setIsLoaded(true);
       });
     axios
-      .get("http://127.0.0.1:8000/api/v1/category/" + id)
+      .get(config.apiHost + "/api/v1/category/" + id)
       .then((response) => {
         console.log(response.data);
         setCategoryTitle(response.data.title);

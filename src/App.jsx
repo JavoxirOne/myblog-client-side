@@ -13,7 +13,7 @@ import Loader from "./components/loader/loader";
 import config from "./config";
 function App() {
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
       window.addEventListener("load", () => {
         setLoading(false);
