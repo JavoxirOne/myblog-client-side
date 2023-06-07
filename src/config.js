@@ -1,5 +1,6 @@
+const DEBUG = false
 const config = {
-  apiHost: "https://javoxirone.pythonanywhere.com",
+  apiHost: DEBUG ? "http://127.0.0.1:8000" : "https://javoxirone.pythonanywhere.com",
 };
 
 export default config;
