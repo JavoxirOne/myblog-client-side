@@ -1,5 +1,5 @@
 const config = {
-  apiHost: "http://javoxirone.pythonanywhere.com",
+  apiHost: "https://javoxirone.pythonanywhere.com",
 };
 
 export default config;
