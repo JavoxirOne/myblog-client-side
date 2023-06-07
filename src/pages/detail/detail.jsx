@@ -1,17 +1,19 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import Card from "../../components/card/card";
 import axios from "axios";
 import config from "../../config";
+import moment from "moment";
 const Detail = () => {
-  const location = useLocation();
-  const { id } = location.state;
+  const { id } = useParams();
   const [article, setArticle] = useState({});
   const [recArticles, setRecArticles] = useState([]);
-
+  const convertTimestampToDateString = (timestamp) => {
+    return (moment(timestamp).format("DD MMM YYYY") + "").toUpperCase();
+  };
   useEffect(() => {
     // get the article details and recommended articles data from the backend
     axios
@@ -43,12 +45,26 @@ const Detail = () => {
       <section className="article">
         <div className="container">
           <div className="article__img">
-            <img src={config.apiHost + article.image} alt={article.title} width="100%" />
+            <img
+              src={config.apiHost + article.image}
+              alt={article.title}
+              width="100%"
+            />
           </div>
+          
           <div>
-            <h3 class="article__title">
-              {article.title}
-            </h3>
+            <h3 className="article__title">{article.title}</h3>
+          </div>
+          <div style={{display: 'flex', gap: '32px', marginBottom: '16px'}}>
+            <div style={{ color: "#bababa" }}>
+              <FontAwesomeIcon icon={faEye} /> {article.views}
+            </div>
+            <div style={{ color: "#bababa" }}>
+              {convertTimestampToDateString(article.created_at)}
+            </div>
+            <div style={{ color: "#bababa" }}>
+              {article.category.title.toUpperCase()}
+            </div>
           </div>
           <div
             className="article__content"
@@ -75,9 +91,6 @@ const Detail = () => {
           >
             Facebook
           </a>
-          <div>
-            <FontAwesomeIcon icon={faEye} /> {article.views}
-          </div>
         </div>
         <div className="rec-line"></div>
       </div>

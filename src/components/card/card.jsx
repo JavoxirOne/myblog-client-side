@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import config from "../../config";
 const Card = ({ article }) => {
+  const convertTimestampToDateString = (timestamp) => {
+    return moment(timestamp).format("DD MMM YYYY");
+  };
   function updateViews(article_id, inc_views) {
     axios
       .put(`${config.apiHost}/api/v1/article/${article_id}/`, {
@@ -32,7 +35,7 @@ const Card = ({ article }) => {
               </a>
             </div>
             <div className="card__date">
-              {moment(article.created_at).format("MMMM Do YYYY")}
+              {convertTimestampToDateString(article.created_at)}
             </div>
             <div className="card__views">
               <FontAwesomeIcon icon={faEye} /> {article.views}
@@ -41,9 +44,8 @@ const Card = ({ article }) => {
           <div className="card__body">
             <h3 className="card__title">
               <Link
-                to={"/article/" + article.id}
+                to={`/article/${article.id}`}
                 className="card__title-link"
-                state={{ id: article.id }}
               >
                 {article.title}
               </Link>

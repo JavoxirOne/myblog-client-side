@@ -11,25 +11,12 @@ import Header from "./components/header/header";
 import ScrollToTop from "./components/scrollToTop/scrollToTop";
 import Loader from "./components/loader/loader";
 import config from "./config";
+import { useCategories } from "./hooks/useCategory";
 function App() {
-  const [categories, setCategories] = useState([]);
+  const categories = useCategories()
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-      window.addEventListener("load", () => {
-        setLoading(false);
-      });
-    
-  }, []);
-  useEffect(() => {
-    axios
-      .get(config.apiHost + "/api/v1/category/")
-      .then((response) => {
-        console.log(response.data);
-        setCategories(response.data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    setLoading(false);
   }, []);
   return (
     <Router>

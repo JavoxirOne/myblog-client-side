@@ -1,11 +1,10 @@
-import React from "react";
 import myblog from "../../assets/myblog.jpg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import moment from 'moment'
 
-const Header = ({ categories }) => {
-  console.log(categories)
+const Header = ({ categories = [] }) => {
+  
   return (
     <header className="header">
       <div className="header__content">
@@ -31,9 +30,8 @@ const Header = ({ categories }) => {
                 {categories.map((category) => (
                   <li className="list__item" key={category.id}>
                     <Link
-                      to={"/category/" + category.id}
+                      to={`/category/${category.id}`}
                       className="item__link"
-                      state={{ id: category.id }}
                     >
                       {category.title}
                     </Link>
